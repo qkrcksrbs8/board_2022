@@ -1,5 +1,6 @@
 package cg.park.board_2022.view.controllers;
 
+import cg.park.board_2022.comm.annotation.RequireLogin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,6 +19,12 @@ public class BoardController {
 
     public String indexView() {
         return "index";
+    }
+
+    @RequireLogin
+    @GetMapping("/boards")
+    public String boards() {
+        return "board/boards";
     }
 
 }

@@ -17,7 +17,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="/">메인</a>
-                <a class="btn btn-primary" href="/auth/login">Sign Up</a>
+                <a class="btn btn-primary" href="/auth/login" style="background-color: #6A24FE; border-color: #6A24FE;">Sign Up</a>
             </div>
         </nav>
         <!-- Masthead-->
