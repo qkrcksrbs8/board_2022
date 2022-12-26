@@ -2,6 +2,7 @@ package cg.park.board_2022.comm.auth;
 
 import cg.park.board_2022.comm.model.TokenDataResponse;
 import cg.park.board_2022.comm.model.TokenResponse;
+import cg.park.board_2022.comm.model.TokenResponseNoData;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -27,7 +28,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // (1)
-                .setIssuer("test") // 토큰발급자(iss)
+                .setIssuer("admin") // 토큰발급자(iss)
                 .setIssuedAt(now) // 발급시간(iat)
                 .setExpiration(expiration) // 만료시간(exp)
                 .setSubject(subject) //  토큰 제목(subject)
@@ -36,11 +37,11 @@ public class JwtProvider {
     }
 
     public Claims parseJwtToken(String token) {
-        token = BearerRemove(token); // Bearer 제거
-        return Jwts.parser()
-                .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
-                .parseClaimsJws(token)
-                .getBody();
+            token = BearerRemove(token); // Bearer 제거
+            return Jwts.parser()
+                    .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
+                    .parseClaimsJws(token)
+                    .getBody();
     }
 
     private String BearerRemove(String token) {
@@ -57,11 +58,11 @@ public class JwtProvider {
         return tokenResponse;
     }
 
-//    public TokenResponseNoData checkToken(@RequestHeader(value = "Authorization") String token) throws Exception {
-//        Claims claims = jwtProvider.parseJwtToken(token);
-//
-//        TokenResponseNoData tokenResponseNoData = new TokenResponseNoData("200", "success");
-//        return tokenResponseNoData;
-//    }
+    public TokenResponseNoData checkToken(@RequestHeader(value = "Authorization") String token) throws Exception {
+        Claims claims = parseJwtToken(token);
+
+        TokenResponseNoData tokenResponseNoData = new TokenResponseNoData("200", "success");
+        return tokenResponseNoData;
+    }
 
 }

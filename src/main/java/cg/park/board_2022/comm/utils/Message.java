@@ -61,4 +61,9 @@ public class Message extends Param {
         return this;
     }
 
+    public Message notAuth() {
+        super.set("code", "P101").set("message", "유효하지 않은 토큰입니다.");
+        return this;
+    }
+
 }
