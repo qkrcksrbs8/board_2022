@@ -13,7 +13,7 @@
 
     .login-wrapper{
         width: 600px;
-        height: 480px;
+        height: 350px;
         padding: 40px;
         box-sizing: border-box;
     }
@@ -78,26 +78,21 @@
             </div>
         </nav>
         <div class="login-wrapper" style="margin-left: auto; margin-right: auto; margin-top: 120px; border: ridge;">
-            <h2>SignUp</h2>
-            <form method="post" action="" id="login-form">
-                <input type="text" name="id" placeholder="아이디">
+            <h2>Login</h2>
+            <form method="post" action="/auth/signIn" id="login-form">
+                <input type="text" name="memberId" placeholder="아이디">
                 <input type="password" name="password" placeholder="비밀번호">
-                <input type="checkPassword" name="checkPassword" placeholder="비밀번호 확인">
-                <input type="text" name="name" placeholder="이름">
 
                 <label >
-                    <a onclick="login();" style="cursor:pointer;">로그인</a>
+                    <a onclick="signUp();" style="cursor:pointer;">회원 가입</a>
                 </label>
-                <input type="submit" value="회원 가입">
+                <input type="submit" value="SignIn">
             </form>
         </div>
     </body>
 <script>
     const signUp = () => {
         location.href = '/auth/signUp';
-    }
-    const login = () => {
-        location.href = '/auth/login';
     }
 </script>
 </html>

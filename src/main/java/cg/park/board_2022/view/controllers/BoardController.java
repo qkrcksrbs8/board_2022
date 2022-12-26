@@ -21,7 +21,6 @@ public class BoardController {
         return "index";
     }
 
-    @RequireLogin
     @GetMapping("/boards")
     public String boards() {
         return "board/boards";

@@ -13,7 +13,7 @@
 
     .login-wrapper{
         width: 600px;
-        height: 350px;
+        height: 480px;
         padding: 40px;
         box-sizing: border-box;
     }
@@ -23,7 +23,7 @@
         color: #6A24FE;
         margin-bottom: 20px;
     }
-    #login-form > input{
+    #signForm > input{
         width: 100%;
         height: 48px;
         padding: 0 10px;
@@ -32,33 +32,34 @@
         border-radius: 6px;
         background-color: #F8F8F8;
     }
-    #login-form > input::placeholder{
+    #signForm > input::placeholder{
         color: #D2D2D2;
     }
-    #login-form > input[type="submit"]{
+    #signForm > input[type="button"]{
         color: #fff;
         font-size: 16px;
         background-color: #6A24FE;
         margin-top: 20px;
     }
 
-    #login-form > input[type="checkbox"]{
+    #signForm > input[type="checkbox"]{
         display: none;
     }
-    #login-form > label{
+    #signForm > label{
         color: #999999;
     }
-    #login-form input[type="checkbox"] + label{
+    #signForm input[type="checkbox"] + label{
         cursor: pointer;
         padding-left: 26px;
         background-repeat: no-repeat;
         background-size: contain;
     }
-    #login-form input[type="checkbox"]:checked + label{
+    #signForm input[type="checkbox"]:checked + label{
         background-repeat: no-repeat;
         background-size: contain;
     }
 </style>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -78,21 +79,41 @@
             </div>
         </nav>
         <div class="login-wrapper" style="margin-left: auto; margin-right: auto; margin-top: 120px; border: ridge;">
-            <h2>Login</h2>
-            <form method="post" action="auth/login" id="login-form">
-                <input type="text" name="id" placeholder="아이디">
-                <input type="password" name="password" placeholder="비밀번호">
+            <h2>SignUp</h2>
+            <form method="post" action="" id="signForm">
+                <input type="text" id="memberId" name="memberId" placeholder="아이디">
+                <input type="password" id="password" name="password" placeholder="비밀번호">
+                <input type="checkPassword" id="checkPassword" placeholder="비밀번호 확인">
+                <input type="text" id="name" name="name" placeholder="이름">
 
                 <label >
-                    <a onclick="signUp();" style="cursor:pointer;">회원 가입</a>
+                    <a onclick="signIn();" style="cursor:pointer;">로그인</a>
                 </label>
-                <input type="submit" value="Login">
+                <input type="button" onclick="signUp();" value="회원 가입">
             </form>
         </div>
     </body>
 <script>
     const signUp = () => {
-        location.href = '/auth/signUp';
+
+        let memberId = $('#memberId').val();
+        let password = $('#password').val();
+        let name = $('name').val();
+
+        let param = {
+            memberId, password, name
+        }
+        $.post("/auth/signUp", param,              // 서버가 필요한 정보를 같이 보냄.
+            function(data) {
+                alert(data);
+            }
+        );
+
+        return false;
+
+    }
+    const signIn = () => {
+        location.href = '/auth/signIn';
     }
 </script>
 </html>
