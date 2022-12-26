@@ -94,6 +94,7 @@
         </div>
     </body>
 <script>
+
     const signUp = () => {
 
         let memberId = $('#memberId').val();
@@ -105,7 +106,8 @@
         }
         $.post("/auth/signUp", param,              // 서버가 필요한 정보를 같이 보냄.
             function(data) {
-                alert(data);
+                alert(data.message);
+                location.href = '/auth/signIn';
             }
         );
 

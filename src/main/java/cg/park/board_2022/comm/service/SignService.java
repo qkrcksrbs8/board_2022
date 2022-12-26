@@ -25,23 +25,28 @@ public class SignService {
 
     private boolean isMember(Param param) {
         if (null == param || "".equals(param.get("code"))) return false;
-        if ("-1".equals(param.get("code"))) return false;
+        if (!param.code().startsWith("S")) return false;
         return true;
     }
 
     private Param memberCheck(Member member) {
-        if (null == member) return new Param("code", "-1");
-        if ("".equals(member.getMemberId()) || "".equals(member.getPassword())) return new Param("code", "-1");
-        return new Param("code", "1").set("member", member);
+        if (null == member) return new Param("code", "F001");
+        if ("".equals(member.getMemberId()) || "".equals(member.getPassword())) return new Param("code", "F001");
+        return new Param("code", "S001").set("data", member);
     }
 
     public Param signUp(Member member) {
         try {
             memberRepository.save(member);
-            return new Param("code", "1");
+            return new Param("code", "S001");
         }
         catch (Exception e) {
-            return new Param("code", "-2");
+            return new Param("code", "F002");
         }
     }
+
+    public boolean duplicateMember(String memberId) {
+        return null != memberRepository.findByMemberId(memberId);
+    }
+
 }
