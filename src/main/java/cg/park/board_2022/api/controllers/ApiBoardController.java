@@ -11,7 +11,13 @@ public class ApiBoardController {
 
     @RequireLogin
     @GetMapping("/test")
-    public String index() {
+    public String test() {
         return "test";
     }
+
+    @GetMapping("/loginTest")
+    public String LoginTest() {
+        return "loign plz";
+    }
+
 }
