@@ -84,8 +84,8 @@
                 <input type="text"          id="memberId"       name="memberId"     onkeyup="lengthCheck(this, 20);" placeholder="아이디">
                 <input type="password"      id="password"       name="password"     onkeyup="lengthCheck(this, 20); passwordCheck(this);" placeholder="비밀번호">
                 <label id="password_label"      style="color: red; display: none;">비밀번호는 8자 이상 20자 이하 대소문자 포함</label>
-                <input type="password"      id="checkPassword"  name="checkPassword"onkeyup="lengthCheck(this, 30);" placeholder="비밀번호 확인">
-                <label id="checkPassword_label" style="color: red; display: none;">비밀번호와 일치하지 않습니다.</label>
+                <input type="password"      id="password2"      name="password2"    onkeyup="lengthCheck(this, 30); password2Check(this);" placeholder="비밀번호 확인">
+                <label id="password2_label" style="color: red; display: none;">비밀번호와 일치하지 않습니다.</label>
                 <input type="text"          id="name"           name="name"         onkeyup="lengthCheck(this, 25); nameCheck(this);" placeholder="이름">
                 <label id="name_label" style="color: red; display: none;">한글만 입력 가능합니다.</label>
 
@@ -109,7 +109,7 @@
 
     const labelDisplay = (v, display) => {
         let label_id = '#' + v + '_label';
-        $(label_id).css('display', display);
+        $(label_id).css('display', display? 'block' : 'none');
     }
 
     const passwordCheck = (v) => {
@@ -119,23 +119,40 @@
         }
         let reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
         if(!reg.test(v.value)) {
-            labelDisplay(v.id, 'block');
+            labelDisplay(v.id, true);
             return false;
         }
-        labelDisplay(v.id, 'none');
+        labelDisplay(v.id, false);
+    }
+
+    const password2Check = (v) => {
+        if (v.value == '') {
+            labelDisplay(v.id, false);
+            return false;
+        }
+        let pw = $('#password').val();
+        if (pw == '') {
+            labelDisplay(v.id, true);
+            return false;
+        }
+        if (pw != v.value) {
+            labelDisplay(v.id, true);
+            return false;
+        }
+        labelDisplay(v.id, false);
     }
 
     const nameCheck = (v) => {
         if (v.value == '') {
-            labelDisplay(v.id, 'none');
+            labelDisplay(v.id, false);
             return false;
         }
         let reg = /^[ㄱ-ㅎ가-힣]+$/; // 한글만
         if(!reg.test(v.value)) {
-            labelDisplay(v.id, 'block');
+            labelDisplay(v.id, true);
             return false;
         }
-        labelDisplay(v.id, 'none');
+        labelDisplay(v.id, false);
     }
 
     const signUp = () => {
