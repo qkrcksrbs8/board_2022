@@ -13,7 +13,7 @@
 
     .login-wrapper{
         width: 600px;
-        height: 480px;
+        height: 500px;
         padding: 40px;
         box-sizing: border-box;
     }
@@ -28,7 +28,7 @@
         height: 48px;
         padding: 0 10px;
         box-sizing: border-box;
-        margin-bottom: 16px;
+        margin-top: 16px;
         border-radius: 6px;
         background-color: #F8F8F8;
     }
@@ -81,10 +81,13 @@
         <div class="login-wrapper" style="margin-left: auto; margin-right: auto; margin-top: 120px; border: ridge;">
             <h2>SignUp</h2>
             <form method="post" action="" id="signForm">
-                <input type="text" id="memberId" name="memberId" placeholder="아이디">
-                <input type="password" id="password" name="password" placeholder="비밀번호">
-                <input type="checkPassword" id="checkPassword" placeholder="비밀번호 확인">
-                <input type="text" id="name" name="name" placeholder="이름">
+                <input type="text"          id="memberId"       name="memberId"     onkeyup="lengthCheck(this, 20);" placeholder="아이디">
+                <input type="password"      id="password"       name="password"     onkeyup="lengthCheck(this, 20); passwordCheck(this);" placeholder="비밀번호">
+                <label id="password_label"      style="color: red; display: none;">비밀번호는 8자 이상 20자 이하 대소문자 포함</label>
+                <input type="password"      id="checkPassword"  name="checkPassword"onkeyup="lengthCheck(this, 30);" placeholder="비밀번호 확인">
+                <label id="checkPassword_label" style="color: red; display: none;">비밀번호와 일치하지 않습니다.</label>
+                <input type="text"          id="name"           name="name"         onkeyup="lengthCheck(this, 25); nameCheck(this);" placeholder="이름">
+                <label id="name_label" style="color: red; display: none;">한글만 입력 가능합니다.</label>
 
                 <label >
                     <a onclick="signIn();" style="cursor:pointer;">로그인</a>
@@ -95,6 +98,46 @@
     </body>
 <script>
 
+    const lengthCheck = (v, length) => {
+        if (v.value == '') return;
+        let id = '#'+v.id;
+        if (v.value.length > parseInt(length)) {
+            $(id).val(v.value.substring(0, parseInt(length)));
+            return false;
+        }
+    }
+
+    const labelDisplay = (v, display) => {
+        let label_id = '#' + v + '_label';
+        $(label_id).css('display', display);
+    }
+
+    const passwordCheck = (v) => {
+        if (v.value == '') {
+            labelDisplay(v.id, false);
+            return false;
+        }
+        let reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+        if(!reg.test(v.value)) {
+            labelDisplay(v.id, 'block');
+            return false;
+        }
+        labelDisplay(v.id, 'none');
+    }
+
+    const nameCheck = (v) => {
+        if (v.value == '') {
+            labelDisplay(v.id, 'none');
+            return false;
+        }
+        let reg = /^[ㄱ-ㅎ가-힣]+$/; // 한글만
+        if(!reg.test(v.value)) {
+            labelDisplay(v.id, 'block');
+            return false;
+        }
+        labelDisplay(v.id, 'none');
+    }
+
     const signUp = () => {
 
         let memberId = $('#memberId').val();
@@ -104,7 +147,7 @@
         let param = {
             memberId, password, name
         }
-        $.post("/auth/signUp", param,              // 서버가 필요한 정보를 같이 보냄.
+        $.post("/auth/signUp", param,
             function(data) {
                 alert(data.message);
                 location.href = '/auth/signIn';
