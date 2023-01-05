@@ -75,6 +75,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="/">메인</a>
+                <a class="navbar-brand" href="/boards" style="margin-right: auto">게시판</a>
             </div>
         </nav>
         <div class="login-wrapper" style="margin-left: auto; margin-right: auto; margin-top: 120px; border: ridge;">
