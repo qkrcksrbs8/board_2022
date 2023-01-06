@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class LoginInterceptor {
+public class RequireLoginAop {
 
     @Autowired
     PcgUtil pcgUtil;
