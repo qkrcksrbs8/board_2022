@@ -60,6 +60,7 @@ public class ParamLogAop {
     //    @AfterThrowing(pointcut = "execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))", throwing = "ex")
     @AfterThrowing(pointcut = "execution(* cg.park.board_2022..controllers.*.*(..))", throwing = "ex")
     public void afterThrowingAnException(JoinPoint joinPoint, Exception ex) {
+        logger.info("SSID = {}", pcgUtil.requestedSessionId());
         logger.info("SSID = {}, ===================E N D===================", pcgUtil.requestedSessionId());
     }
 
