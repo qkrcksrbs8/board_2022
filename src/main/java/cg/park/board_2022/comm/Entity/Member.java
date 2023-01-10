@@ -1,6 +1,5 @@
 package cg.park.board_2022.comm.Entity;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
