@@ -10,15 +10,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class HttpRequestHelper {
 
     public static HttpServletRequest getCurrentRequest() {
-        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-        return sra.getRequest();
+        return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     }
 
     public static HttpServletResponse getCurrentResponse() {
-        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-        return sra.getResponse();
+        return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
     }
 
     public static HttpSession getCurrentSession() {
@@ -30,11 +26,9 @@ public class HttpRequestHelper {
      * @return
      */
     public static String getRequestIp() {
-        String _access_ip = getCurrentRequest().getHeader("X-Forwarded-For");
-        if(_access_ip  == null){
-            _access_ip = getCurrentRequest().getRemoteAddr();
-        }
-
-        return _access_ip;
+        String accessIp = getCurrentRequest().getHeader("X-Forwarded-For");
+        return (null == accessIp)
+                ? getCurrentRequest().getRemoteAddr()
+                : accessIp;
     }
 }
