@@ -1,18 +1,18 @@
 -- 멤버 테이블
 CREATE TABLE MEMBER(
-    member_no int not null auto_increment primary key, --회원 번호
-    member_id varchar(30) not null, --회원 아이디
-    password varchar(255) not null, --회원 비밀번호
-    name varchar(30) --회원 이름
+    member_no int not null auto_increment primary key,
+    member_id varchar(30) not null,
+    password varchar(255) not null,
+    name varchar(30)
 ) DEFAULT CHARSET=utf8;
 
 -- 게시글
 CREATE TABLE BOARD(
-      board_no int not null auto_increment primary key, --게시글 번호
-      title varchar(255), --제목
-      content varchar(30), --내용
-      created_date date default now(), --생성일
-      created_by int, --생성자
-      updated_date date, --수정일
-      updated_by int --수정자
+      board_no int not null auto_increment primary key,
+      title varchar(255),
+      content varchar(30),
+      created_date date default now(),
+      created_by int,
+      updated_date date,
+      updated_by int
 ) DEFAULT CHARSET=utf8;
