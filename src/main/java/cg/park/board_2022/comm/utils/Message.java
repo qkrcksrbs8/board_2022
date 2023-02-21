@@ -66,4 +66,8 @@ public class Message extends Param {
         return this;
     }
 
+    public Message successAndFile(Param param) {
+        return param.code().startsWith("S") ? success(param) : fail();
+    }
+
 }
