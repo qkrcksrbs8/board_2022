@@ -30,6 +30,13 @@ public class Param extends HashMap {
         return this;
     }
 
+    public Param success() {
+        return this.set("code", "S001");
+    }
+    public Param fail() {
+        return this.set("code", "F001");
+    }
+
     public String code() {
         return (String) super.get("code");
     }
