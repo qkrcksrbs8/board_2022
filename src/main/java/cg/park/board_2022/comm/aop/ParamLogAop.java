@@ -24,8 +24,6 @@ public class ParamLogAop {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-
     //    @Around("execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))")
     @Around("execution(* cg.park.board_2022..controllers.*.*(..))")
     public Object around(@NotNull ProceedingJoinPoint joinPoint) throws Throwable {
