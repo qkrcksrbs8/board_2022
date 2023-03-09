@@ -160,7 +160,7 @@
 
         let memberId = $('#memberId').val();
         let password = $('#password').val();
-        let name = $('name').val();
+        let name = $('#name').val();
 
         let param = {
             memberId, password, name
