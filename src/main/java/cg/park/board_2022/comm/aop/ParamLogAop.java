@@ -24,7 +24,6 @@ public class ParamLogAop {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //    @Around("execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))")
     @Around("execution(* cg.park.board_2022..controllers.*.*(..))")
     public Object around(@NotNull ProceedingJoinPoint joinPoint) throws Throwable {
         String type = joinPoint.getSignature().toShortString();
@@ -34,7 +33,6 @@ public class ParamLogAop {
         return joinPoint.proceed();
     }
 
-    //    @Before("execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))")
     @Before("execution(* cg.park.board_2022..controllers.*.*(..))")
     public void before(JoinPoint joinPoint) {
         String type = joinPoint.getSignature().toShortString();
@@ -47,7 +45,6 @@ public class ParamLogAop {
         }
     }
 
-    //    @AfterReturning(pointcut = "execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))", returning="retValue")
     @AfterReturning(pointcut = "execution(* cg.park.board_2022..controllers.*.*(..))", returning="retValue")
     public void after(JoinPoint joinPoint, Object retValue) {
         String type = joinPoint.getSignature().toShortString();
@@ -55,7 +52,6 @@ public class ParamLogAop {
         logger.info("SSID = {}, ===================E N D===================", pcgUtil.requestedSessionId());
     }
 
-    //    @AfterThrowing(pointcut = "execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))", throwing = "ex")
     @AfterThrowing(pointcut = "execution(* cg.park.board_2022..controllers.*.*(..))", throwing = "ex")
     public void afterThrowingAnException(JoinPoint joinPoint, Exception ex) {
         logger.info("SSID = {}", pcgUtil.requestedSessionId());
