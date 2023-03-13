@@ -17,6 +17,7 @@ public class RequireLoginAop {
 
     @Around("@annotation(cg.park.board_2022.comm.annotation.RequireLogin)")
     public Object around(@NotNull ProceedingJoinPoint joinPoint) throws Throwable {
+        // login log
         return (!pcgUtil.isValidatedToken()) ? "/auth/signIn" : joinPoint.proceed();
     }
 
